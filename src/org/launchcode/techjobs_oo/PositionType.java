@@ -1,5 +1,7 @@
 package org.launchcode.techjobs_oo;
 
+import java.util.Objects;
+
 public class PositionType {
     private int id;
     private static int nextId = 1;
@@ -13,6 +15,24 @@ public class PositionType {
     public PositionType(String value) {
         this();
         this.value = value;
+    }
+
+    // custom toString, equals, and hashCode methods
+    public String toString() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PositionType that = (PositionType) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     // TODO: Add a custom toString() method that returns the data stored in 'value'.
