@@ -88,4 +88,5 @@ public class Job {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }
