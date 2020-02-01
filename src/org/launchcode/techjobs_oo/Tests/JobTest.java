@@ -11,6 +11,7 @@ public class JobTest {
     Job second_test_job;
     Job test_job_all_fields;
     Job second_test_job_all_fields;
+    Job test_job_empty_fields;
 
     @Before
     public void createJobObjects() {
@@ -18,6 +19,7 @@ public class JobTest {
         second_test_job = new Job();
         test_job_all_fields = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         second_test_job_all_fields = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        test_job_empty_fields = new Job("", new Employer(), new Location(), new PositionType(), new CoreCompetency("Testing"));
     }
 
     @Test
@@ -41,5 +43,40 @@ public class JobTest {
     @Test
     public void testJobsForEquality() {
         assertFalse(test_job_all_fields.equals(second_test_job_all_fields));
+    }
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        assertTrue(test_job_all_fields.toString().startsWith("\n", 0));
+        assertTrue(test_job_all_fields.toString().endsWith("\n"));
+    }
+
+    @Test
+    public void testToStringFormattedAndFilledCorrectly() {
+        assertEquals("\nID: " + test_job_all_fields.getId() +
+                "\nName: " + test_job_all_fields.getName() +
+                "\nEmployer: " + test_job_all_fields.getEmployer() +
+                "\nLocation: " + test_job_all_fields.getLocation() +
+                "\nPosition Type: " + test_job_all_fields.getPositionType() +
+                "\nCore Competency: " + test_job_all_fields.getCoreCompetency() +
+                "\n",
+                test_job_all_fields.toString());
+    }
+
+    @Test
+    public void testToStringInformsOfEmptyField() {
+        assertEquals("\nID: " + test_job_empty_fields.getId() +
+                "\nName: Data not available" +
+                "\nEmployer: Data not available" +
+                "\nLocation: Data not available" +
+                "\nPosition Type: Data not available" +
+                "\nCore Competency: " + test_job_empty_fields.getCoreCompetency() +
+                "\n",
+                test_job_empty_fields.toString());
+    }
+
+    @Test
+    public void testToStringInformsIfOnlyIdIsSet() {
+        assertEquals("\nThis job does not seem to exist.\n", test_job.toString());
     }
 }

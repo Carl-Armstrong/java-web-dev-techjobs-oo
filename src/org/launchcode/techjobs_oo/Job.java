@@ -88,4 +88,60 @@ public class Job {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    // custom toString method
+
+    @Override
+    public String toString() {
+        String name;
+        String employer;
+        String location;
+        String positionType;
+        String coreCompetency;
+
+        // check if all fields are null
+        if (getName() == null &&
+                getEmployer() == null &&
+                getLocation() == null &&
+                getPositionType() == null &&
+                getCoreCompetency() == null
+        ) {
+            return "\nThis job does not seem to exist.\n";
+        }
+
+        // check if individual fields are empty
+        if (getName() == "" || getName() == null) {
+            name = "Data not available";
+        } else {
+            name = getName();
+        }
+        if (getEmployer().getValue() == null) {
+            employer = "Data not available";
+        } else {
+            employer = getEmployer().getValue();
+        }
+        if (getLocation().getValue() == null) {
+            location = "Data not available";
+        } else {
+            location = getLocation().getValue();
+        }
+        if (getPositionType().getValue() == null) {
+            positionType = "Data not available";
+        } else {
+            positionType = getPositionType().getValue();
+        }
+        if (getCoreCompetency().getValue() == null) {
+            coreCompetency = "Data not available";
+        } else {
+            coreCompetency = getCoreCompetency().getValue();
+        }
+
+        return "\nID: " + getId() +
+                "\nName: " + name +
+                "\nEmployer: " + employer +
+                "\nLocation: " + location +
+                "\nPosition Type: " + positionType +
+                "\nCore Competency: " + coreCompetency +
+                "\n";
+    }
 }
